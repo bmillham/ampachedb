@@ -1,0 +1,10 @@
+# For documentation on how to configure this file,
+# see https://diesel.rs/guides/configuring-diesel-cli
+
+[print_schema]
+file = "src/schema.rs"
+custom_type_derives = ["diesel::query_builder::QueryId", "Clone"]
+filter = {except_tables=["account_groups", "group_perms", "song_data", "update_info", "user_catalog", "user_preference", "user_vote", "playlist", "playlist_data", "search", "video", "wanted", "localplay_shoutcast", "now_playing", "localplay_mpd", "localplay_httpq", "live_stream", "ip_history", "image", "groups", "group_perms", "dynamic_playlist", "dynamic_playlist_data", "democratic", "channel", "broadcast", "access_list", "account_groups", "accounts", "song_preview", "user_shout", "user_flag", "rating", "recommendation", "recommendation_item", "session", "session_stream", "share", "player_control", "catalog", "catalog_local", "catalog_remote", "listeners", "object_count", "permissions", "played", "preference", "site_options", "tmp_browse", "user", "users", "suggestions"]}
+
+[migrations_directory]
+dir = "/home/brian/projects/ampachedb/migrations"

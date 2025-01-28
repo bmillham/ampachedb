@@ -1,0 +1,9 @@
+[package]
+name = "ampachedb"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+diesel = { version = "2.2.0", features = ["mysql", "chrono"] }
+dotenvy = "0.15"
+chrono = { version = "0.4" }
