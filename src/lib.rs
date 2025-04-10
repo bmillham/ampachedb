@@ -1,5 +1,4 @@
-use self::models::{Album, Artist, RequestList, Song};
-use self::schema::artist::dsl::*;
+use self::models::{Album, RequestList, Song};
 use chrono::{NaiveDateTime, Utc};
 use diesel::prelude::*;
 use dotenvy::dotenv;
@@ -49,7 +48,16 @@ fn get_prefix(value: &str) -> (&str, &str) {
     ("", value)
 }
 
+pub fn find_song_by_file(connection: &mut MysqlConnection, filename: &str) -> Vec<Song> {
+    song.filter(file.eq(filename))
+        .load::<Song>(connection)
+        .expect("Unable to read song")
+}
+
 pub fn get_song_info_from_ice(ice_title: String) -> (u32, String) {
+    use self::models::Artist;
+    use self::schema::artist::dsl::*;
+
     let connection = &mut establish_connection(None);
 
     let parts: Vec<&str> = ice_title.split(" - ").collect();
