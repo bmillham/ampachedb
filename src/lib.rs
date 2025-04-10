@@ -8,12 +8,16 @@ pub mod models;
 pub mod schema;
 
 // Prefixes for Artist/Album
-const PREFIXES: &'static [&'static str] = &["The", "A", "An", "Die", "La", "Le", "Les"];
+const PREFIXES: &[&str; 7] = &["The", "A", "An", "Die", "La", "Le", "Les"];
 
 pub fn establish_connection(url: Option<String>) -> MysqlConnection {
     dotenv().ok();
 
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL not set");
+    //let database_url = env::var("DATABASE_URL").expect("DATABASE_URL not set");
+    let database_url = match url {
+        Some(u) => u,
+        _ => env::var("DATABASE_URL").expect("DATABASE_URL not set"),
+    };
     MysqlConnection::establish(&database_url)
         .unwrap_or_else(|_| panic!("Unable to connect to {}", database_url))
 }
